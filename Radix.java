@@ -24,22 +24,20 @@ public class Radix {
 		for (int i = 0; i < 10; i++) {
 			buckets[i] = new SortableLinkedList();
 		}
-
-		SortableLinkedList temp = new SortableLinkedList(); //getting number of total passes/columns needed.
+		//getting number of total passes/columns needed.
 		int numCols = -1;
 		int size = data.size();
 		for (int i = 0; i < size; i++) {
 			int current = data.remove(0);
-			temp.add(current);
+			data.add(current);
 			if (length(current) > numCols) {
 				numCols = length(current);
 			}
 		}
-		data.extend(temp); //refresh data;
 
-		int sizeOfData = data.size(); //performing RadixSort
+		//performing RadixSort
 		for (int col = 0; col < numCols; col++) {
-			for (int j = 0; j < sizeOfData; j++) {
+			for (int j = 0; j < size; j++) {
 				int number = data.remove(0);
 				int digit = nth(number, col);
 				buckets[digit].add(number);
@@ -48,12 +46,29 @@ public class Radix {
 		}
 	}
 	public static void radixSort(SortableLinkedList data) {
-		return;
 		SortableLinkedList nonNegatives = new SortableLinkedList();
 		SortableLinkedList negatives = new SortableLinkedList();
 
-		for (int i = 0; i < data.size(); i++) {
-			if (data.g)
+		//populating nonNegatives and negatives
+		int dataSize = data.size();
+		for (int i = 0; i < dataSize; i++) {
+			int current = data.remove(0);
+			if (current < 0) {
+				negatives.add(current);
+			} else {
+				nonNegatives.add(current);
+			}
 		}
+
+		radixSortSimple(nonNegatives); //sorted list of nonNegative numbers
+		radixSortSimple(negatives); //reverse-sorted list of negative numbers, so biggest number is found at index 0.
+
+		//taking the negatives and adding them to the beginning of data in descending order.
+		int negativesSize = negatives.size();
+		for (int i = 0; i < negativesSize; i++) {
+			int number = negatives.remove(0);
+			data.add(0, number);
+		}
+		data.extend(nonNegatives);
 	}
 }
