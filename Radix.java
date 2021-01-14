@@ -25,14 +25,17 @@ public class Radix {
 			buckets[i] = new SortableLinkedList();
 		}
 
-		int current = data.get(0);
-		int numCols = length(current); //getting number of total passes/columns needed.
-		for (int i = 1; i < data.size(); i++) {
-			current = data.get(i);
+		SortableLinkedList temp = new SortableLinkedList(); //getting number of total passes/columns needed.
+		int numCols = -1;
+		int size = data.size();
+		for (int i = 0; i < size; i++) {
+			int current = data.remove(0);
+			temp.add(current);
 			if (length(current) > numCols) {
 				numCols = length(current);
 			}
 		}
+		data.extend(temp); //refresh data;
 
 		int sizeOfData = data.size(); //performing RadixSort
 		for (int col = 0; col < numCols; col++) {
@@ -42,6 +45,15 @@ public class Radix {
 				buckets[digit].add(number);
 			}
 			merge(data, buckets);
+		}
+	}
+	public static void radixSort(SortableLinkedList data) {
+		return;
+		SortableLinkedList nonNegatives = new SortableLinkedList();
+		SortableLinkedList negatives = new SortableLinkedList();
+
+		for (int i = 0; i < data.size(); i++) {
+			if (data.g)
 		}
 	}
 }
