@@ -4,6 +4,7 @@ public class Tester {
 		System.out.println(Radix.nth(-123,1));
 		System.out.println(Radix.nth(123,2));
 		System.out.println(Radix.nth(-123,2));
+		System.out.println(Radix.nth(15, 2));
 		System.out.println(27/4);
 
 		System.out.println();
@@ -38,5 +39,22 @@ public class Tester {
 		System.out.println("method call: Radix.merge(original, buckets)");
 		Radix.merge(original, buckets);
 		System.out.println("original: " + original);
+
+		SortableLinkedList testSimple = new SortableLinkedList();
+		for (int i = 0; i < 15; i++) {
+			if (i % 3 == 0) {
+				testSimple.add(i);
+			}
+			else if (i % 3 == 1) {
+				testSimple.add(i*i);
+			}
+			else if (i % 3 == 2) {
+				testSimple.add(i * i * i);
+			}
+		}
+		System.out.println(testSimple);
+
+		Radix.radixSortSimple(testSimple);
+		System.out.println(testSimple);
 	}
 }
