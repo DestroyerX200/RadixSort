@@ -5,5 +5,12 @@ public class Tester {
 		System.out.println(Radix.nth(123,2));
 		System.out.println(Radix.nth(-123,2));
 		System.out.println(27/4);
+
+		System.out.println();
+
+		System.out.println(Radix.length(0));
+		System.out.println(Radix.length(15));
+		System.out.println(Radix.length(-10));
+		System.out.println(Radix.length(5112));
 	}
 }
