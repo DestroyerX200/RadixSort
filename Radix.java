@@ -27,15 +27,17 @@ public class Radix {
 		int numCols = -1;
 		int size = data.size();
 		for (int i = 0; i < size; i++) {
-			int current = data.remove(0);
-			data.add(current);
-			if (length(current) > numCols) {
-				numCols = length(current);
+			int number = data.remove(0);
+			int digit = nth(number, 0);
+			buckets[digit].add(number);
+			if (length(number) > numCols) {
+				numCols = length(number);
 			}
 		}
+		merge(data, buckets);
 
 		//performing RadixSort
-		for (int col = 0; col < numCols; col++) {
+		for (int col = 1; col < numCols; col++) {
 			for (int j = 0; j < size; j++) {
 				int number = data.remove(0);
 				int digit = nth(number, col);
